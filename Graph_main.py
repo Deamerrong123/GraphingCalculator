@@ -31,12 +31,18 @@ def PolarEqu_numGen(r_theta,interval):
     return num
 
 if __name__ == '__main__':
-    WIDTH, HEIGHT = 10,10
+    #WIDTH, HEIGHT = 10,10
     win = Screen()
 
-    win.setworldcoordinates(-WIDTH/2 , -HEIGHT/2 , WIDTH//2 , HEIGHT//2)
+    #win.setworldcoordinates(-WIDTH/2 , -HEIGHT/2 , WIDTH//2 , HEIGHT//2)
+    Dim = {'X' : {'lower' : -10 , 'upper' : 10} , 'Y' : {'lower' : -10, 'upper':10}}
+    D = [Dim['X']['lower'],Dim['Y']['lower'] , Dim['X']['upper'],Dim['Y']['upper']]
+   
+    win.setworldcoordinates(D[0],D[1],D[2],D[3])
+
     
-    G = Grapher(WIDTH,HEIGHT)
+    
+    G = Grapher(Dim)
     '''
     f = lambda x : sin(x)
     interval = (0,9,0.1)

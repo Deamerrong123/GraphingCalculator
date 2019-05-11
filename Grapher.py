@@ -2,47 +2,48 @@ from turtle import Turtle, Screen
 
 class Grapher:
 
+   def __init__(self,Dim):
+      self.T = Turtle(visible = False)
+      self.T.speed('fastest')
 
-    def __init__(self,width,height):
-        self._T = Turtle(visible = False)
-        self._T.speed('fastest')
-        self.axis(width,1)
-        self._T.setheading(90)
-        self.axis(height,1)
+      self.draw_axis(Dim)
 
-    def axis(self, distance, tick):
-        position = self._T.position()
-        self._T.pendown()
+   def axis(self,distance,tick):
+      pos = self.T.position()
+      self.T.pendown()
 
-        for _ in range(0, distance // 2, tick):
-            self._T.forward(tick)
-            self._T.dot()
+      for _ in range(0,abs(distance['upper']),tick):
+         self.T.forward(tick)
+         self.T.dot()
 
-        self._T.setposition(position)
+      self.T.setposition(pos)
 
-        for _ in range(0, distance // 2, tick):
-            self._T.backward(tick)
-            self._T.dot()
-        self._T.penup()
-        self._T.home()
-    '''
-    def generate(self,f,interval):
-        num = []
-        start,end,inc = interval
-        while start < end:
-            num.append((start,f(start)))
-            start += inc
-        return num
-    '''
-    def plot(self,region):
-        self._T.speed('slowest')
-        self._T.penup()
-        self._T.pencolor('blue')
+      for _ in range(0,abs(distance['lower']),tick):
+         self.T.backward(tick)
+         self.T.dot()
 
-        #num = self.generate(f,interval)
+      self.T.penup()
+      
+
+   def draw_axis(self,Dim):
+      self.T.penup()
+      self.T.home()
+
+      self.axis(Dim['X'],1)
+      self.T.penup()
+      self.T.home()
+
+      self.T.setheading(90)
+      self.axis(Dim['Y'],1)
+
+   def plot(self,region):
+        self.T.speed('slowest')
+        self.T.penup()
+        self.T.pencolor('blue')
+
 
         for p in region:
-            self._T.goto(p)
-            self._T.pendown()
+            self.T.goto(p)
+            self.T.pendown()
 
-        self._T.penup()
+        self.T.penup()
