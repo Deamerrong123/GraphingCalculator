@@ -1,69 +1,48 @@
-from turtle import Screen, Turtle
-from math import *
+from turtle import Turtle, Screen
+
+class Grapher:
 
 
-#win = Screen()
-WIDTH , HEIGHT = 20, 15
-### __ 
+    def __init__(self,width,height):
+        self._T = Turtle(visible = False)
+        self._T.speed('fastest')
+        self.axis(width,1)
+        self._T.setheading(90)
+        self.axis(height,1)
 
-def axis(turtle, distance, tick):
-    position = turtle.position()
-    turtle.pendown()
+    def axis(self, distance, tick):
+        position = self._T.position()
+        self._T.pendown()
 
-    for _ in range(0, distance // 2, tick):
-        turtle.forward(tick)
-        turtle.dot()
+        for _ in range(0, distance // 2, tick):
+            self._T.forward(tick)
+            self._T.dot()
 
-    turtle.setposition(position)
+        self._T.setposition(position)
 
-    for _ in range(0, distance // 2, tick):
-        turtle.backward(tick)
-        turtle.dot()
-    turtle.penup()
-    turtle.home()
+        for _ in range(0, distance // 2, tick):
+            self._T.backward(tick)
+            self._T.dot()
+        self._T.penup()
+        self._T.home()
+    '''
+    def generate(self,f,interval):
+        num = []
+        start,end,inc = interval
+        while start < end:
+            num.append((start,f(start)))
+            start += inc
+        return num
+    '''
+    def plot(self,region):
+        self._T.speed('slowest')
+        self._T.penup()
+        self._T.pencolor('blue')
 
-def generate(f,interval):
-    num = []
-    start,end,inc = interval
-    while start < end:
-        num.append((start,f(start)))
-        start += inc
-    return num
+        #num = self.generate(f,interval)
 
-def plot(turtle,f,interval):
-    turtle.penup()
-    turtle.pencolor('blue')
+        for p in region:
+            self._T.goto(p)
+            self._T.pendown()
 
-    num = generate(f,interval)
-
-    for p in num:
-        turtle.goto(p)
-        turtle.pendown()
-
-    turtle.penup()
-    
-
-
-if __name__ == '__main__':
-    win = Screen()
-    win.setworldcoordinates(-WIDTH/2 , -HEIGHT/2 , WIDTH//2 , HEIGHT//2)
-    
-    T = Turtle(visible = False)
-    T.speed('fastest')
-
-    axis(T,WIDTH,1)
-    T.setheading(90)
-    axis(T,HEIGHT,1)
-    
-
-    f = lambda x : sin(x)
-
-    interval = (0,9,0.1)
-
-    plot(T,f,interval)
-
-    win.exitonclick()
-
-    
-
-    
+        self._T.penup()

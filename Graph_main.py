@@ -1,4 +1,4 @@
-from Graph_obj import *
+from grapher import *
 from turtle import Turtle, Screen
 from math import *
 
