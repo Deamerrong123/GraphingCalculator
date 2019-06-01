@@ -37,7 +37,7 @@ class Grapher:
       self.axis(Dim['Y'],1)
 
    def plot(self,region):
-        self.T.speed('slowest')
+        self.T.speed('fast')
         self.T.penup()
         self.T.pencolor('blue')
 
